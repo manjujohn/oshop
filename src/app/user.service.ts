@@ -12,10 +12,6 @@ import { map, switchMap } from 'rxjs/operators';
 })
 export class UserService {
   item :any;
-  // item = {
-  //   name :string,
-
-  // };
 
   userdetails:Observable<any>;
 
@@ -28,19 +24,12 @@ export class UserService {
      this.db.object('/users/'+user.uid).update({
        name: user.displayName,
        email: user.email,
-       isAdmin:false
+       isAdmin:true,
      });  
     
    }
 
  get (uid : string){
-   //this.userdetails = this.db.object('/users/'+uid).valueChanges();
-   //return this.userdetails;
-   return {
-     name:"manjujohn",
-     email:"manjujohn007@gmail.com",
-     isAdmin:true
-   }
-    
+    return this.db.object('/users/'+ uid).valueChanges();
  }
 }

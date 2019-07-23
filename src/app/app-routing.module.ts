@@ -13,15 +13,15 @@ import { AuthGuardService } from './auth-guard.service';
 import { AdminAuthGuard } from './admin-auth-guard.service';
 
 const routes: Routes = [
-  {path:'', component: HomeComponent},
-  {path:'products', component: ProductsComponent},
-  {path:'shopping-cart', component: ShoppingCartComponent},
-  {path:'check-out', component: CheckOutComponent, canActivate:[AuthGuardService]},
-  {path:'login', component: LoginComponent},
-  {path:'my/orders', component: MyOrdersComponent, canActivate:[AuthGuardService]},
-  {path:'order-success', component:OrderSuccessComponent, canActivate:[AuthGuardService]},
-  {path:'admin/products', component:AdminProductsComponent, canActivate:[AuthGuardService, AdminAuthGuard]},
-  {path:'admin/orders', component:AdminOrdersComponent, canActivate:[AuthGuardService, AdminAuthGuard]}
+//   {path:'', component: HomeComponent},
+//   {path:'products', component: ProductsComponent},
+//   {path:'shopping-cart', component: ShoppingCartComponent},
+//   {path:'check-out', component: CheckOutComponent, canActivate:[AuthGuardService]},
+//   {path:'login', component: LoginComponent},
+//   {path:'my/orders', component: MyOrdersComponent, canActivate:[AuthGuardService]},
+//   {path:'order-success', component:OrderSuccessComponent, canActivate:[AuthGuardService]},
+//   {path:'admin/products', component:AdminProductsComponent, canActivate:[AuthGuardService, AdminAuthGuard]},
+//   {path:'admin/orders', component:AdminOrdersComponent, canActivate:[AuthGuardService, AdminAuthGuard]}
 
 ];
 

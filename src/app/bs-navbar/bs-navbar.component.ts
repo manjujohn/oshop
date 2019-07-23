@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 import { AuthService } from '../auth.service';
 import { auth } from 'firebase';
 import { Observable } from 'rxjs';
@@ -16,12 +15,24 @@ export class BsNavbarComponent {
 
   appUser: AppUser;
 
-  constructor(private auth:AuthService) {
-    auth.appUser$.subscribe(appUser=> this.appUser = appUser);
+  constructor(private auth:AuthService) {    
+    if(auth.user$){
+      auth.appUser$.subscribe((appUser)=> {
+
+        appUser.subscribe(res=>{
+          this.appUser = res;
+  
+        })
+        
+      })
+
+    }
+    
    }
 
   logout(){
    this.auth.logout();
+   this.appUser=null;
    
   }
 
