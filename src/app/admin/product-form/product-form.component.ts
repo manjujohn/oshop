@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from 'src/app/category.service';
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap,take } from 'rxjs/operators';
 import { ProductService } from 'src/app/product.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 @Component({   
   selector: 'app-product-form',
   templateUrl: './product-form.component.html',
@@ -10,17 +10,38 @@ import { Router } from '@angular/router';
 })
 export class ProductFormComponent implements OnInit {
   categories$;
+  product={ };
+  id;
 
   constructor(private categoryService: CategoryService ,
-      private router : Router,
-     private productService: ProductService ) { 
+    private route: ActivatedRoute,
+    private router : Router,
+     private productService: ProductService ) {
+
+    this.id = this.route.snapshot.paramMap.get('id');
+
     categoryService.getCategories().subscribe(val=>{
       this.categories$ = val;
     });
+
+    
+    if(this.id) {
+      this.productService.get(this.id).subscribe(prod=>{
+        this.product = prod;
+      })
+    }
   }
 
-  save(products){
-    this.productService.create(products);
+  save(product){
+    if(this.id) this.productService.update(this.id, product);
+    else this.productService.create(product);
+    this.router.navigate(['/admin/products']);
+  }
+
+  delete(){
+    if(!confirm('Are you sure want to delete this product?')) return ;
+    
+    this.productService.delete(this.id);
     this.router.navigate(['/admin/products']);
   }
 

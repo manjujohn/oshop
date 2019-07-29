@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFireModule} from 'angularfire2';
 import { AngularFireDatabaseModule} from 'angularfire2/database';
@@ -8,6 +9,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {FormsModule} from '@angular/forms';
 import {CustomFormsModule} from 'ng2-validation';
+import {DataTableModule} from 'angular5-data-table';
+import { CdkTable} from '@angular/cdk/table'
+import { CdkTableModule } from '@angular/cdk/table';
+
+import {MatNativeDateModule} from '@angular/material/core';
+
+import {DemoMaterialModule} from './material-module';
+
 import { environment } from 'src/environments/environment';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
 import { HomeComponent } from './home/home.component';
@@ -45,6 +54,7 @@ import { ProductService } from './product.service';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
@@ -52,6 +62,11 @@ import { ProductService } from './product.service';
     NgbModule,
     FormsModule,
     CustomFormsModule,
+    DataTableModule,
+    DemoMaterialModule,
+    MatNativeDateModule,
+    CdkTableModule,
+    CdkTableModule,
     RouterModule.forRoot([
       {path:'', component: HomeComponent},
       {path:'products', component: ProductsComponent},
@@ -62,6 +77,7 @@ import { ProductService } from './product.service';
       {path:'order-success', component:OrderSuccessComponent, canActivate:[AuthGuardService]},
       {path:'admin/products', component:AdminProductsComponent},
       {path:'admin/products/new', component:ProductFormComponent},
+      {path:'admin/products/:id', component:ProductFormComponent},
       {path:'admin/orders', component:AdminOrdersComponent, canActivate:[AuthGuardService, AdminAuthGuard]}
     ])
   ],
