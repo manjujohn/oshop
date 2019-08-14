@@ -12,7 +12,7 @@
         <tr *ngFor="let order of orders">
           <td> {{order.shipping.name}}</td>
           <td> {{order.datePlaced | date:'yyyy/MM/dd'}}</td>
-          <td class="text-right"><a>View</a></td>
+          <td class="text-right"><a [routerLink]="['/admin/orders/',order.key]">View</a></td>
         </tr>
       </tbody>
     </table>

@@ -4,3 +4,31 @@ body {
     padding-top: 80px;
 
 }
+a.list-group-item.active{
+    background-color: #a75fc5;
+    border-color: #6c757d;
+}
+.list-group-item{
+    background-color:#f2eeee
+}
+.bg-light {
+    background-color: #a75fc5 !important;
+}
+.btn {
+    color: #fff;
+    background-color: #a75fc5;
+    border-color: #6c757d;
+}
+.btn:hover
+{
+background-image:none;
+background-color:#431357;
+}
+.btn-primary:disabled{
+    background-color:#aa7dbd;
+    border-color: #6c757d;
+}
+input[type=text]:focus{
+    outline: 2px solid  #a75fc5; 
+    box-shadow: 0 0 0 2px #a75fc5;    
+  }

@@ -1,5 +1,5 @@
 <h2>Orders</h2>
-<div  class="row col-10">
+<div  class="row col-10" *ngIf="order">
     <table class="table">
       <thead>
         <tr>
@@ -12,7 +12,7 @@
         <tr *ngFor="let order of order">
           <td> {{order.shipping.name}}</td>
           <td> {{order.datePlaced | date:'yyyy/MM/dd'}}</td>
-          <td class="text-right"><a>View</a></td>
+          <td class="text-right"><a [routerLink]="['/my/orders/',order.key]">View</a></td>
         </tr>
       </tbody>
     </table>
