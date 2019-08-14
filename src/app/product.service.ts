@@ -5,13 +5,13 @@ import { map} from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
+
 export class ProductService {
+  
  productArray : any[]=[];
  itemsRef: AngularFireList<any>;
-  items: Observable<any[]>;
 
   constructor(private db:AngularFireDatabase) {
-   // this.getAll();
    }
   create(products){
     return this.db.list('/products').push(products);
@@ -25,15 +25,13 @@ export class ProductService {
     }));
   }
 
-
-
   get(productId){
     return this.db.object('/products/'+ productId).valueChanges().pipe(map(p=>{
       return p;
     }));
   }
+
    update(productId, product){
-     console.log("update",product,productId)
     return this.db.object('/products/'+productId).update(product);
    }
 

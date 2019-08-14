@@ -10,12 +10,7 @@ import { AppComponent } from './app.component';
 import {FormsModule} from '@angular/forms';
 import {CustomFormsModule} from 'ng2-validation';
 import {DataTableModule} from 'angular5-data-table';
-import { CdkTable} from '@angular/cdk/table'
-import { CdkTableModule } from '@angular/cdk/table';
-
-import {MatNativeDateModule} from '@angular/material/core';
-
-import {DemoMaterialModule} from './material-module';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 import { environment } from 'src/environments/environment';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
@@ -29,13 +24,20 @@ import { AdminProductsComponent } from './admin/admin-products/admin-products.co
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './auth.service';
-import { AuthGuardService } from './auth-guard.service';
+import { AuthGuard } from './auth-guard.service';
 import { UserService } from './user.service';
 import { AdminAuthGuard } from './admin-auth-guard.service';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { RouterModule } from '@angular/router';
 import { CategoryService } from './category.service';
 import { ProductService } from './product.service';
+import { ProductFilterComponent } from './products/product-filter/product-filter.component';
+import { ProductCardComponent } from './product-card/product-card.component';
+import { ShoppingCartService } from './shopping-cart.service';
+import { ProductQuantityComponent } from './product-quantity/product-quantity.component';
+import { OrderService } from './order.service';
+import { ShoppingCartSummaryComponent } from './shopping-cart-summary/shopping-cart-summary.component';
+import { ShippingFormComponent } from './shipping-form/shipping-form.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,12 @@ import { ProductService } from './product.service';
     AdminProductsComponent,
     AdminOrdersComponent,
     LoginComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    ProductFilterComponent,
+    ProductCardComponent,
+    ProductQuantityComponent,
+    ShoppingCartSummaryComponent,
+    ShippingFormComponent
   ],
   imports: [
     BrowserModule,
@@ -62,32 +69,31 @@ import { ProductService } from './product.service';
     NgbModule,
     FormsModule,
     CustomFormsModule,
-    DataTableModule,
-    DemoMaterialModule,
-    MatNativeDateModule,
-    CdkTableModule,
-    CdkTableModule,
+    DataTableModule.forRoot(),
+    AngularFontAwesomeModule,
     RouterModule.forRoot([
-      {path:'', component: HomeComponent},
+      {path:'', component: ProductsComponent},
       {path:'products', component: ProductsComponent},
-      {path:'shopping-cart', component: ShoppingCartComponent},
-      {path:'check-out', component: CheckOutComponent, canActivate:[AuthGuardService]},
+      {path:'shopping-cart', component: ShoppingCartComponent, canActivate:[AuthGuard ]},
       {path:'login', component: LoginComponent},
-      {path:'my/orders', component: MyOrdersComponent, canActivate:[AuthGuardService]},
-      {path:'order-success', component:OrderSuccessComponent, canActivate:[AuthGuardService]},
-      {path:'admin/products', component:AdminProductsComponent},
-      {path:'admin/products/new', component:ProductFormComponent},
-      {path:'admin/products/:id', component:ProductFormComponent},
-      {path:'admin/orders', component:AdminOrdersComponent, canActivate:[AuthGuardService, AdminAuthGuard]}
+      {path:'check-out', component: CheckOutComponent, canActivate:[AuthGuard ]},
+      {path:'my/orders', component: MyOrdersComponent, canActivate:[AuthGuard ]},
+      {path:'order-success/:id', component:OrderSuccessComponent, canActivate:[AuthGuard ]},
+      {path:'admin/products', component:AdminProductsComponent,canActivate:[AuthGuard,AdminAuthGuard ]},
+      {path:'admin/products/new', component:ProductFormComponent,canActivate:[AuthGuard ,AdminAuthGuard]},
+      {path:'admin/products/:id', component:ProductFormComponent, canActivate:[AuthGuard ,AdminAuthGuard]},
+      {path:'admin/orders', component:AdminOrdersComponent, canActivate:[AuthGuard ,AdminAuthGuard]}
     ])
   ],
   providers: [
     AuthService,
-    AuthGuardService,
+    AuthGuard ,
     UserService,
     AdminAuthGuard,
     CategoryService,
-    ProductService
+    ProductService,
+    ShoppingCartService,
+    OrderService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,5 +1,5 @@
 <p>
-    <a routerLink="/admin/products/new" class="btn btn-primary">New</a>
+    <a routerLink="/admin/products/new" class="btn btn-primary">New Product</a>
 </p>
 <p>
     <input #query (keyup)="filter(query.value)" type="text" placeholder="Search.." class="form-control">
@@ -32,8 +32,6 @@
 
 <data-table-column
 [property]="'key'"
-[sortable]=true
-[resizable]=true
 >
 <ng-template #dataTableCell let-item="item">
  <a [routerLink]="['/admin/products/',item.key]">Edit</a>

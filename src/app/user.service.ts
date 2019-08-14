@@ -21,13 +21,18 @@ export class UserService {
    }
   //  private name : FirebaseObj
    save(user: firebase.User){
-     this.db.object('/users/'+user.uid).update({
-       name: user.displayName,
-       email: user.email,
-       isAdmin:true,
-     });  
+     console.log("uid",user.uid);
+     if(user.uid!=='8Y8rPSR28vMEtyBNqdg8XNu06KD3'){
+      this.db.object('/users/'+user.uid).update({
+        name: user.displayName,
+        email: user.email,
+        isAdmin:false,
+      });  
+     }
+    
     
    }
+   //this.db.list('/orders').push(orders);
 
  get (uid : string){
     return this.db.object('/users/'+ uid).valueChanges();

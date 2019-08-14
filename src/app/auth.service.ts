@@ -21,21 +21,20 @@ export class AuthService {
     private userService: UserService,
     private afAuth : AngularFireAuth , 
     private router: Router,
-    private route: ActivatedRoute) { 
-      this.user$= afAuth.authState; 
-      
+    private route: ActivatedRoute) {
+
+    this.user$= afAuth.authState; 
    }
 
   login(){
-    console.log("login reached",this.user$);
     let returnUrl =  this.route.snapshot.queryParamMap.get('returnUrl') || '/';
     localStorage.setItem('returnUrl', returnUrl);
-    console.log("returnUrlauth", returnUrl);
     this.afAuth.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
   }
   logout(){
     console.log("logout reached",this.user$);
     this.afAuth.auth.signOut();
+    this.router.navigate(['/login']);
     
   }
     get appUser$(){
